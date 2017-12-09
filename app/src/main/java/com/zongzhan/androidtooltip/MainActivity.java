@@ -9,28 +9,53 @@ import com.zongzhan.tooltip.Tooltip;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button button;
+    Tooltip tooltip;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        button = findViewById(R.id.button);
+        Button top = findViewById(R.id.top);
+        Button down = findViewById(R.id.down);
+        Button left = findViewById(R.id.left);
+        Button right = findViewById(R.id.right);
 
-        Tooltip.Builder builder = new Tooltip.Builder();
-        Tooltip tooltip = builder.target(button)
-                .position(Tooltip.Position.BELOW)
-                .toolTipView(R.layout.hint)
-                .closeWhenTouch(false, false)
-                .consumeTouchEvent(false, false)
-                .align(Tooltip.Align.CENTER)
-                .build();
+        View targetView = findViewById(R.id.target_view);
 
-        button.setOnClickListener(v -> {
-            if (tooltip.isShowing()) {
-                tooltip.dismiss();
-            } else {
-                tooltip.show();
-            }
+        top.setOnClickListener(view -> {
+            Tooltip.Builder builder = new Tooltip.Builder();
+            tooltip = builder.target(targetView)
+                    .position(Tooltip.Position.ABOVE)
+                    .toolTipView(R.layout.hint)
+                    .build();
+            tooltip.show();
+        });
+
+        down.setOnClickListener(view -> {
+            Tooltip.Builder builder = new Tooltip.Builder();
+            tooltip = builder.target(targetView)
+                    .position(Tooltip.Position.BELOW)
+                    .toolTipView(R.layout.hint)
+                    .build();
+            tooltip.show();
+        });
+
+        left.setOnClickListener(view -> {
+            Tooltip.Builder builder = new Tooltip.Builder();
+            tooltip = builder.target(targetView)
+                    .position(Tooltip.Position.LEFT)
+                    .toolTipView(R.layout.hint)
+                    .build();
+            tooltip.show();
+        });
+
+        right.setOnClickListener(view -> {
+            Tooltip.Builder builder = new Tooltip.Builder();
+            tooltip = builder.target(targetView)
+                    .position(Tooltip.Position.RIGHT)
+                    .toolTipView(R.layout.hint)
+                    .build();
+            tooltip.show();
         });
 
     }
